@@ -26,6 +26,6 @@ def render_pdf_viewer(pdf_pages: Optional[List] = None):
         )
         
         # Display PDF pages
-        with st.container(height=410, border=True):
+        with st.container(height=500, border=True):
             for page_image in pdf_pages:
                 st.image(page_image, width=zoom_level) 

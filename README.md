@@ -1,10 +1,11 @@
 # 🤖 Chat with PDF locally using Ollama + LangChain
 
-A powerful local RAG (Retrieval Augmented Generation) application that lets you chat with your PDF documents using Ollama and LangChain. This project includes both a Jupyter notebook for experimentation and a Streamlit web interface for easy interaction.
+A powerful local RAG (Retrieval Augmented Generation) application that lets you chat with your PDF documents using Ollama and LangChain. This project includes both a Jupyter notebook for experimentation and a Streamlit web interface for easy interaction. Shout out to [Tony Kipkemboi!](https://tonykipkemboi.com)
 
-[![Python Tests](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml/badge.svg)](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml)
+<!-- [![Python Tests](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml/badge.svg)](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml) -->
 
-## Project Structure
+## Project File Structure
+
 ```
 ollama_pdf_rag/
 ├── src/                      # Source code
@@ -30,11 +31,6 @@ ollama_pdf_rag/
 └── run.py                   # Application runner
 ```
 
-## 📺 Video Tutorial
-<a href="https://youtu.be/ztBJqzBU5kc">
-  <img src="https://img.youtube.com/vi/ztBJqzBU5kc/hqdefault.jpg" alt="Watch the video" width="100%">
-</a>
-
 ## ✨ Features
 
 - 🔒 Fully local processing - no data leaves your machine
@@ -49,6 +45,7 @@ ollama_pdf_rag/
 ### Prerequisites
 
 1. **Install Ollama**
+
    - Visit [Ollama's website](https://ollama.ai) to download and install
    - Pull required models:
      ```bash
@@ -57,44 +54,54 @@ ollama_pdf_rag/
      ```
 
 2. **Clone Repository**
+
    ```bash
-   git clone https://github.com/tonykipkemboi/ollama_pdf_rag.git
+   git clone https://github.com/aghoshpro/OllamaRAG.git
    cd ollama_pdf_rag
    ```
 
 3. **Set Up Environment**
+
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   pip install -r requirements.txt
+   python -m venv myvenv
    ```
 
-   Key dependencies and their versions:
-   ```txt
-   ollama==0.4.4
-   streamlit==1.40.0
-   pdfplumber==0.11.4
-   langchain==0.1.20
-   langchain-core==0.1.53
-   langchain-ollama==0.0.2
-   chromadb==0.4.22
+   ```
+   # On Windows
+   .\myvenv\Scripts\activate
+
+   **OR**
+
+   # On Linux or Mac
+    source myvenv/bin/activate
+   ```
+
+   ```
+   pip install -r requirements.txt
    ```
 
 ### 🎮 Running the Application
 
 #### Option 1: Streamlit Interface
+
 ```bash
 python run.py
 ```
+
 Then open your browser to `http://localhost:8501`
 
-![Streamlit UI](st_app_ui.png)
-*Streamlit interface showing PDF viewer and chat functionality*
+<img src="ChatPDF.mp4"/>
+
+<img src="20250130_170739.gif">
+
+_Streamlit interface showing PDF viewer and chat functionality_
 
 #### Option 2: Jupyter Notebook
+
 ```bash
 jupyter notebook
 ```
+
 Open `updated_rag_notebook.ipynb` to experiment with the code
 
 ## 💡 Usage Tips
@@ -108,6 +115,7 @@ Open `updated_rag_notebook.ipynb` to experiment with the code
 ## 🤝 Contributing
 
 Feel free to:
+
 - Open issues for bugs or suggestions
 - Submit pull requests
 - Comment on the YouTube video for questions
@@ -120,16 +128,18 @@ Feel free to:
 - Verify Python environment is activated
 - For Windows users, ensure WSL2 is properly configured if using Ollama
 
-### Common Errors
+## ☘️ Common Errors
 
-#### ONNX DLL Error
-If you encounter this error:
+### ONNX DLL Error
+
 ```
 DLL load failed while importing onnx_copy2py_export: a dynamic link Library (DLL) initialization routine failed.
 ```
 
 Try these solutions:
+
 1. Install Microsoft Visual C++ Redistributable:
+
    - Download and install both x64 and x86 versions from [Microsoft's official website](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
    - Restart your computer after installation
 
@@ -140,9 +150,11 @@ Try these solutions:
    ```
 
 #### CPU-Only Systems
+
 If you're running on a CPU-only system:
 
 1. Ensure you have the CPU version of ONNX Runtime:
+
    ```bash
    pip uninstall onnxruntime-gpu  # Remove GPU version if installed
    pip install onnxruntime  # Install CPU-only version
@@ -154,9 +166,45 @@ If you're running on a CPU-only system:
 
 Note: The application will run slower on CPU-only systems, but it will still work effectively.
 
+### TesseractNotFoundError
+
+```
+TesseractNotFoundError: tesseract is not installed or it's not in your PATH. See README file for more information.
+```
+
+Try this solution from [stackoverflow](https://stackoverflow.com/questions/50951955/pytesseract-tesseractnotfound-error-tesseract-is-not-installed-or-its-not-i):
+
+- Install tesseract using windows installer available at: https://github.com/UB-Mannheim/tesseract/wiki
+
+- Note the tesseract path from the installation **C:\Program Files\Tesseract-OCR** add it to system variables path.
+
+  - try running the app again before preceding further.
+
+- `pip install pytesseract` [OPTIONAL]
+
+- Set the tesseract path in the script before calling image_to_string [OPTIONAL]
+
+  ```
+  pytesseract.pytesseract.tesseract_cmd = r'C:\Users\USER\AppData\Local\Tesseract-OCR\tesseract.exe'
+  ```
+
+### Lookup Error
+
+```
+Lookup error ... nltk.download('averaged_perceptron_tagger_eng') is not found
+```
+
+- Add the following to `main.py` and run again
+
+  ```
+  import nltk
+  nltk.download('averaged_perceptron_tagger_eng')
+  ```
+
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 # Run all tests
 python -m unittest discover tests
@@ -166,6 +214,7 @@ python -m unittest discover tests -v
 ```
 
 ### Pre-commit Hooks
+
 The project uses pre-commit hooks to ensure code quality. To set up:
 
 ```bash
@@ -174,12 +223,15 @@ pre-commit install
 ```
 
 This will:
+
 - Run tests before each commit
 - Run linting checks
 - Ensure code quality standards are met
 
 ### Continuous Integration
+
 The project uses GitHub Actions for CI. On every push and pull request:
+
 - Tests are run on multiple Python versions (3.9, 3.10, 3.11)
 - Dependencies are installed
 - Ollama models are pulled
@@ -188,13 +240,3 @@ The project uses GitHub Actions for CI. On every push and pull request:
 ## 📝 License
 
 This project is open source and available under the MIT License.
-
----
-
-## ⭐️ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=tonykipkemboi/ollama_pdf_rag&type=Date)](https://star-history.com/#tonykipkemboi/ollama_pdf_rag&Date)
-
-Built with ❤️ by [Tony Kipkemboi!](https://tonykipkemboi.com)
-
-Follow me on [X](https://x.com/tonykipkemboi) | [LinkedIn](https://www.linkedin.com/in/tonykipkemboi/) | [YouTube](https://www.youtube.com/@tonykipkemboi) | [GitHub](https://github.com/tonykipkemboi)

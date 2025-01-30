@@ -13,6 +13,8 @@ import shutil
 import pdfplumber
 import ollama
 import warnings
+import nltk
+nltk.download('averaged_perceptron_tagger_eng')
 
 # Suppress torch warning
 warnings.filterwarnings('ignore', category=UserWarning, message='.*torch.classes.*')
@@ -38,7 +40,7 @@ PERSIST_DIRECTORY = os.path.join("data", "vectors")
 # Streamlit page configuration
 st.set_page_config(
     page_title="Ollama PDF RAG Streamlit UI",
-    page_icon="🎈",
+    page_icon="✨",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -227,7 +229,7 @@ def main() -> None:
     """
     Main function to run the Streamlit application.
     """
-    st.subheader("🧠 Ollama PDF RAG playground", divider="gray", anchor=False)
+    st.subheader("📚 Chat with PDF (RAG + Ollama)", divider="gray", anchor=False)
 
     # Get available models
     models_info = ollama.list()
@@ -254,7 +256,7 @@ def main() -> None:
 
     # Add checkbox for sample PDF
     use_sample = col1.toggle(
-        "Use sample PDF (Scammer Agent Paper)", 
+        "Use sample PDF (CV of Marissa Mayer)", 
         key="sample_checkbox"
     )
     
@@ -268,7 +270,7 @@ def main() -> None:
 
     if use_sample:
         # Use the sample PDF
-        sample_path = "data/pdfs/sample/scammer-agent.pdf"
+        sample_path = "data/pdfs/sample/cv-of-marissa-mayer.pdf"
         if os.path.exists(sample_path):
             if st.session_state["vector_db"] is None:
                 with st.spinner("Processing sample PDF..."):
@@ -340,7 +342,7 @@ def main() -> None:
 
         # Display chat history
         for i, message in enumerate(st.session_state["messages"]):
-            avatar = "🤖" if message["role"] == "assistant" else "😎"
+            avatar = "🤖" if message["role"] == "assistant" else "👽"
             with message_container.chat_message(message["role"], avatar=avatar):
                 st.markdown(message["content"])
 
@@ -349,7 +351,7 @@ def main() -> None:
             try:
                 # Add user message to chat
                 st.session_state["messages"].append({"role": "user", "content": prompt})
-                with message_container.chat_message("user", avatar="😎"):
+                with message_container.chat_message("user", avatar="👽"):
                     st.markdown(prompt)
 
                 # Process and display assistant response

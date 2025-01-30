@@ -9,10 +9,10 @@ def init_chat_state():
 
 def render_chat_interface(messages: List[Dict]):
     """Render the chat interface with message history."""
-    with st.container(height=500, border=True):
+    with st.container(height=800, border=True):
         # Display chat history
         for message in messages:
-            avatar = "🤖" if message["role"] == "assistant" else "😎"
+            avatar = "🤖" if message["role"] == "assistant" else "👽"
             with st.chat_message(message["role"], avatar=avatar):
                 st.markdown(message["content"])
 

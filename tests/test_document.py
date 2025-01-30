@@ -13,7 +13,7 @@ def processor():
 @pytest.fixture
 def test_pdf_path():
     """Get the test PDF path."""
-    return Path("data/pdfs/sample/scammer-agent.pdf")
+    return Path("data/pdfs/sample/cv-of-marissa-mayer.pdf")
 
 def test_init(processor):
     """Test initialization."""
@@ -34,7 +34,7 @@ def test_load_pdf_file_not_found(mock_load):
     with pytest.raises(FileNotFoundError):
         processor.load_pdf(Path("nonexistent.pdf"))
 
-@pytest.mark.skipif(not Path("data/pdfs/sample/scammer-agent.pdf").exists(),
+@pytest.mark.skipif(not Path("data/pdfs/sample/cv-of-marissa-mayer.pdf").exists(),
                     reason="Sample PDF not found")
 def test_load_pdf_success(processor, test_pdf_path):
     """Test loading existing PDF."""
