@@ -4,31 +4,31 @@ A powerful local RAG (Retrieval Augmented Generation) application that lets you 
 
 <!-- [![Python Tests](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml/badge.svg)](https://github.com/tonykipkemboi/ollama_pdf_rag/actions/workflows/tests.yml) -->
 
-## Project File Structure
+## 📂 Project File Structure
 
 ```
 ollama_pdf_rag/
 ├── src/                      # Source code
 │   ├── app/                  # Streamlit application
 │   │   ├── components/       # UI components
-│   │   │   ├── chat.py      # Chat interface
+│   │   │   ├── chat.py       # Chat interface
 │   │   │   ├── pdf_viewer.py # PDF display
-│   │   │   └── sidebar.py   # Sidebar controls
-│   │   └── main.py          # Main app
+│   │   │   └── sidebar.py    # Sidebar controls
+│   │   └── main.py           # Main app
 │   └── core/                 # Core functionality
 │       ├── document.py       # Document processing
 │       ├── embeddings.py     # Vector embeddings
-│       ├── llm.py           # LLM setup
-│       └── rag.py           # RAG pipeline
+│       ├── llm.py            # LLM setup
+│       └── rag.py            # RAG pipeline
 ├── data/                     # Data storage
-│   ├── pdfs/                # PDF storage
-│   │   └── sample/          # Sample PDFs
-│   └── vectors/             # Vector DB storage
-├── notebooks/               # Jupyter notebooks
-│   └── experiments/         # Experimental notebooks
-├── tests/                   # Unit tests
-├── docs/                    # Documentation
-└── run.py                   # Application runner
+│   ├── pdfs/                 # PDF storage
+│   │   └── sample/           # Sample PDFs
+│   └── vectors/              # Vector DB storage
+├── notebooks/                # Jupyter notebooks
+│   └── experiments/          # Experimental notebooks
+├── tests/                    # Unit tests
+├── docs/                     # Documentation
+└── run.py                    # Application runner
 ```
 
 ## ✨ Features
@@ -80,7 +80,7 @@ ollama_pdf_rag/
    pip install -r requirements.txt
    ```
 
-### 🎮 Running the Application
+## 🎮 Run the App
 
 #### Option 1: Streamlit Interface
 
@@ -88,13 +88,11 @@ ollama_pdf_rag/
 python run.py
 ```
 
-Then open your browser to `http://localhost:8501`
+Then open your browser to local url `http://localhost:8501`
 
-<img src="ChatPDF.mp4"/>
+<img src="ChatPDFx.gif">
 
-<img src="20250130_170739.gif">
-
-_Streamlit interface showing PDF viewer and chat functionality_
+_Streamlit interface showing **ChatPDFx** StreamLit App_
 
 #### Option 2: Jupyter Notebook
 
@@ -112,25 +110,16 @@ Open `updated_rag_notebook.ipynb` to experiment with the code
 4. **Adjust Display**: Use the zoom slider to adjust PDF visibility
 5. **Clean Up**: Use the "Delete Collection" button when switching documents
 
-## 🤝 Contributing
-
-Feel free to:
-
-- Open issues for bugs or suggestions
-- Submit pull requests
-- Comment on the YouTube video for questions
-- Star the repository if you find it useful!
-
-## ⚠️ Troubleshooting
+## 🛠️ Troubleshooting
 
 - Ensure Ollama is running in the background
 - Check that required models are downloaded
 - Verify Python environment is activated
 - For Windows users, ensure WSL2 is properly configured if using Ollama
 
-## ☘️ Common Errors
+## ⚠️ Common Errors
 
-### ONNX DLL Error
+### 🟡 ONNX DLL Error
 
 ```
 DLL load failed while importing onnx_copy2py_export: a dynamic link Library (DLL) initialization routine failed.
@@ -166,7 +155,7 @@ If you're running on a CPU-only system:
 
 Note: The application will run slower on CPU-only systems, but it will still work effectively.
 
-### TesseractNotFoundError
+### 🟡 TesseractNotFoundError
 
 ```
 TesseractNotFoundError: tesseract is not installed or it's not in your PATH. See README file for more information.
@@ -176,9 +165,11 @@ Try this solution from [stackoverflow](https://stackoverflow.com/questions/50951
 
 - Install tesseract using windows installer available at: https://github.com/UB-Mannheim/tesseract/wiki
 
-- Note the tesseract path from the installation **C:\Program Files\Tesseract-OCR** add it to system variables path.
+- Note the tesseract path from the installation **C:\Program Files\Tesseract-OCR** add it to system environmental variables path.
 
-  - try running the app again before preceding further.
+  - Restart the system to adapt the variable effect
+
+  - Activate the `myenv` and run the app again.
 
 - `pip install pytesseract` [OPTIONAL]
 
@@ -188,7 +179,7 @@ Try this solution from [stackoverflow](https://stackoverflow.com/questions/50951
   pytesseract.pytesseract.tesseract_cmd = r'C:\Users\USER\AppData\Local\Tesseract-OCR\tesseract.exe'
   ```
 
-### Lookup Error
+### 🟡 Lookup Error with NLTK
 
 ```
 Lookup error ... nltk.download('averaged_perceptron_tagger_eng') is not found
@@ -236,6 +227,15 @@ The project uses GitHub Actions for CI. On every push and pull request:
 - Dependencies are installed
 - Ollama models are pulled
 - Test results are uploaded as artifacts
+
+## 🤝 Contributing
+
+Feel free to:
+
+- Open issues for bugs or suggestions
+- Submit pull requests
+- Comment on the YouTube video for questions
+- Star the repository if you find it useful!
 
 ## 📝 License
 

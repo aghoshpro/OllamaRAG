@@ -15,6 +15,9 @@ import ollama
 import warnings
 import nltk
 nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('punkt') # IF NOT ALREADY DOWNLOADED
+# nltk.download('popular') # IF UNSURE
+# nltk.download('all') # IF NOTHING ABOVE WORKS
 
 # Suppress torch warning
 warnings.filterwarnings('ignore', category=UserWarning, message='.*torch.classes.*')
@@ -39,7 +42,7 @@ PERSIST_DIRECTORY = os.path.join("data", "vectors")
 
 # Streamlit page configuration
 st.set_page_config(
-    page_title="Ollama PDF RAG Streamlit UI",
+    page_title="ChatPDFx Sutra App",
     page_icon="✨",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -229,7 +232,8 @@ def main() -> None:
     """
     Main function to run the Streamlit application.
     """
-    st.subheader("📚 Chat with PDF (RAG + Ollama)", divider="gray", anchor=False)
+    st.title(":rainbow[ChatPDFx Sutra] 📚")
+    st.subheader("RAG Chatbot built with Langchain and Ollama", divider="red", anchor=False)
 
     # Get available models
     models_info = ollama.list()
@@ -256,7 +260,7 @@ def main() -> None:
 
     # Add checkbox for sample PDF
     use_sample = col1.toggle(
-        "Use sample PDF (CV of Marissa Mayer)", 
+        "Use Sample PDF (CV of Marissa Mayer)", 
         key="sample_checkbox"
     )
     
